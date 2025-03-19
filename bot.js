@@ -105,7 +105,7 @@ client.once('ready', () => {
 
 // Function to handle file download and response
 async function handleDownload(interaction, format, url, videoId) {
-    const command = `yt-dlp.exe -k -o "${outputDir}/%(title)s [%(id)s].${format}" -f ${
+    const command = `yt-dlp -k -o "${outputDir}/%(title)s [%(id)s].${format}" -f ${
         format === 'mp3' ? 'bestaudio' : 'bestvideo+bestaudio'
     } --audio-format mp3 --audio-quality 0 "${url}"`;
 
