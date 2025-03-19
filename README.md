@@ -44,9 +44,13 @@ This project is intended **only for archiving content that you have the legal ri
    npm run start
    ```
 
+## Bot Commands
+   - /downloadmp3 [url] download a video as an MP3
+   - /downloadmp4 [url] download a video as an MP4
+
 ## Notes
 - Files larger than Discord's upload limit are hosted temporarily on a local HTTP server.
-- The bot automatically cleans up old files from the `downloads/` directory after 5 minutes.
+- The bot automatically cleans up old files from the `downloads/` directory after a time set in minutes in config.yaml (default 5).
 
 ## Legal Use
 This bot is intended for **archiving purposes only**. You should only use it to download content that:
