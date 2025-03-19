@@ -1,0 +1,13 @@
+discord:
+  token: "YOUR_DISCORD_BOT_TOKEN_HERE"
+  client_id: "YOUR_DISCORD_CLIENT_ID_HERE"
+  guild_id: "YOUR_GUILD_ID_HERE"
+
+host:
+  url: "http://localhost"
+  port: 3000
+  ttl: 1 # How long you want hosted files to be available in minutes
+
+files:
+  ttl: 5 # How long do you want to cache files for in minutes. This must be greater than the host ttl.
+  outputDir: "./downloads" # Where you want the temp files to be stored

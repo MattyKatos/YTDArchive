@@ -1,0 +1,35 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Config
+config.yaml
+
+# Logs
+logs/
+*.log
+*.log.*
+debug.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Output directory for downloads
+downloads/
+
+# Temporary files
+*.tmp
+*.temp
+
+# IDE-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Required executables for video processing
+yt-dlp.exe
+ffmpeg.exe
