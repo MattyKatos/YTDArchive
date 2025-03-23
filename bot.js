@@ -103,9 +103,8 @@ client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
-// Function to handle file download and response
 async function handleDownload(interaction, format, url, videoId) {
-    const command = `./yt-dlp -k -o "${outputDir}/%(title)s [%(id)s].${format}" -f ${
+    const command = `yt-dlp.exe -k -o "${outputDir}/%(title)s [%(id)s].${format}" -f ${
         format === 'mp3' ? 'bestaudio' : 'bestvideo+bestaudio'
     } --audio-format mp3 --audio-quality 0 "${url}"`;
 
@@ -114,7 +113,7 @@ async function handleDownload(interaction, format, url, videoId) {
     exec(command, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error: ${error.message}`);
-            return interaction.followUp('An error occurred while processing your request.');
+            return interaction.editReply('An error occurred while processing your request.');
         }
         if (stderr) {
             console.error(`stderr: ${stderr}`);
@@ -125,7 +124,7 @@ async function handleDownload(interaction, format, url, videoId) {
         fs.readdir(outputDir, async (err, files) => {
             if (err) {
                 console.error(`Error reading directory: ${err.message}`);
-                return interaction.followUp('An error occurred while locating the downloaded file.');
+                return interaction.editReply('An error occurred while locating the downloaded file.');
             }
 
             // Find the file that matches the video ID
@@ -159,7 +158,7 @@ async function handleDownload(interaction, format, url, videoId) {
                         const downloadLink = `${hostURL}:${hostPort}/${encodeURIComponent(downloadedFile)}`;
                         hostedFiles.set(downloadedFile, filePath); // Map the file name to its path
 
-                        interaction.followUp(
+                        interaction.editReply(
                             `The file is too large to send via Discord.\nYou can download it [here](${downloadLink}).\nThis link will expire <t:${expirationTime}:R>.`
                         );
 
@@ -171,13 +170,13 @@ async function handleDownload(interaction, format, url, videoId) {
                         }, tth);
                     } catch (error) {
                         console.error(`Error hosting file: ${error.message}`);
-                        interaction.followUp('An error occurred while hosting the file.');
+                        interaction.editReply('An error occurred while hosting the file.');
                         inUseFiles.delete(filePath);
                     }
                 } else {
                     // Send the file via Discord
                     const attachment = new AttachmentBuilder(filePath);
-                    interaction.followUp({
+                    interaction.editReply({
                         content: `${format.toUpperCase()} download complete!`,
                         files: [attachment],
                     }).then(() => {
@@ -186,7 +185,7 @@ async function handleDownload(interaction, format, url, videoId) {
                     });
                 }
             } else {
-                interaction.followUp(`${format.toUpperCase()} download complete, but the file could not be located.`);
+                interaction.editReply(`${format.toUpperCase()} download complete, but the file could not be located.`);
             }
         });
     });
